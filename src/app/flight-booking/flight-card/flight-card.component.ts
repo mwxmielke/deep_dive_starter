@@ -1,12 +1,25 @@
+/* tslint:disable:no-console component-selector */
 // src/app/flight-card/flight-card.component.ts
 
-import { Component, Input, Output, EventEmitter, OnChanges, OnInit, SimpleChanges, ElementRef, NgZone } from '@angular/core';
-import { Flight } from '../flight';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import {Flight} from '../flight';
 
 @Component({
   selector: 'flight-card',
   templateUrl: './flight-card.component.html',
-  styleUrls: ['./flight-card.component.scss']
+  styleUrls: ['./flight-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightCardComponent implements OnInit, OnChanges {
 

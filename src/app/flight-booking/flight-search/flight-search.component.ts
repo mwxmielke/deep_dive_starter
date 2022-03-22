@@ -15,11 +15,7 @@ export class FlightSearchComponent implements OnInit {
   to = 'Graz';
   selectedFlight: Flight | null = null;
   delayFilter = false;
-
-  get flights() {
-    // We will refactor this to an observable in a later exercise!
-    return this.flightService.flights;
-  }
+  flights$ = this.flightService.flights$;
 
   basket: { [key: number]: boolean } = {
     3: true,

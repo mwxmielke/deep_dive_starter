@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { BasketComponent } from './basket/basket.component';
+import {CustomerModule} from './customer/customer.module';
 
 @NgModule({
    imports: [
@@ -22,6 +23,7 @@ import { BasketComponent } from './basket/basket.component';
       BrowserModule,
       FlightBookingModule,
       SharedModule,
+      CustomerModule
    ],
    declarations: [
       AppComponent,

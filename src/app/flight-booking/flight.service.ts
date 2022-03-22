@@ -1,8 +1,8 @@
 // src/app/default-flight.service.ts
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { Flight } from './flight';
 
 @Injectable({
@@ -10,20 +10,25 @@ import { Flight } from './flight';
 })
 export class FlightService {
 
-  // We will refactor this to an observable in a later exercise!
-  flights: Flight[] = [];
+  readonly flights$;
+  private flightsSubject = new BehaviorSubject<Flight[]>([]);
 
-  constructor(private http: HttpClient) { }
+  // We will refactor this to an observable in a later exercise!
+  // flights: Flight[] = [];
+
+  constructor(private http: HttpClient) {
+    this.flights$ = this.flightsSubject.asObservable();
+  }
 
   load(from: string, to: string): void {
-    this.find(from, to).subscribe({
-      next: (flights) => {
-        this.flights = flights;
+    this.find(from, to).subscribe(
+      (flights) => {
+        this.flightsSubject.next(flights);
       },
-      error: (err) => {
+      (err) => {
         console.error('error', err);
       }
-    });
+    );
   }
 
   find(from: string, to: string): Observable<Flight[]> {
@@ -40,9 +45,14 @@ export class FlightService {
   }
 
   delay(): void {
-    const date = new Date(this.flights[0].date);
-    date.setTime(date.getTime() + 1000 * 60 * 15);
-    this.flights[0].date = date.toISOString();
+    const currentFlights = this.flightsSubject.value;
+    const currentFirstFlight = currentFlights[0];
+    const date = new Date(currentFlights[0].date);
+
+    const newDate = new Date(date.getTime() + 1000 * 60 * 15);
+    const newFlight: Flight = {...currentFirstFlight, date: newDate.toISOString()};
+    const flights = [newFlight, ...currentFlights.slice(1)];
+    this.flightsSubject.next(flights);
   }
 
 }
