@@ -13,6 +13,11 @@ import { CityValidationDirective } from './validation/city-validation.directive'
 import { TabbedPaneComponent } from './controls/tabbed-pane/tabbed-pane.component';
 import { TabComponent } from './controls/tab/tab.component';
 import { TabNavigatorComponent } from './controls/tab-navigator/tab-navigator.component';
+import { ClickWithWarningDirective } from './controls/click-with-warning.directive';
+import { TooltipDirective } from './tooltip.directive';
+import { TableFieldDirective } from './controls/data-table/table-field.directive';
+import { DataTableComponent } from './controls/data-table/data-table.component';
+import { CustomTemplateOutletDirective } from './custom-template-outlet.directive';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { TabNavigatorComponent } from './controls/tab-navigator/tab-navigator.co
     CityValidationDirective,
      TabbedPaneComponent,
      TabComponent,
-     TabNavigatorComponent
+     TabNavigatorComponent,
+     ClickWithWarningDirective,
+     TooltipDirective,
+     TableFieldDirective,
+     DataTableComponent,
+     CustomTemplateOutletDirective
   ],
   exports: [
     DateComponent,
@@ -43,7 +53,12 @@ import { TabNavigatorComponent } from './controls/tab-navigator/tab-navigator.co
     CityValidationDirective,
      TabbedPaneComponent,
      TabComponent,
-     TabNavigatorComponent
+     TabNavigatorComponent,
+     ClickWithWarningDirective,
+     TooltipDirective,
+     TableFieldDirective,
+     DataTableComponent,
+     CustomTemplateOutletDirective
   ]
 })
 export class SharedModule { }
