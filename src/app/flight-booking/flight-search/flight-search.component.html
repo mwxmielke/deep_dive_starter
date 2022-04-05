@@ -7,7 +7,7 @@
 <form #f="ngForm">
     <div class="form-group">
         <label>From:</label>
-        <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" name="from" required minlength="3" appCity class="form-control">
+        <input [(ngModel)]="from" name="from" [ngModelOptions]="{updateOn: 'change'}"  required minlength="3" appCity class="form-control">
     </div>
 
     <div class="error" *ngIf="!f?.controls?.from?.valid">
@@ -30,11 +30,11 @@
 
     <div class="form-group">
         <label>To:</label>
-        <input [(ngModel)]="to" class="form-control">
+        <input [(ngModel)]="to" name="to" class="form-control">
     </div>
 
     <div class="form-group">
-        <input [(ngModel)]="delayFilter" type="checkbox" id="delayFilter">
+        <input [(ngModel)]="delayFilter" name="delayFilter" type="checkbox" id="delayFilter">
         &nbsp;
         <label for="delayFilter">Delayed</label>
     </div>
@@ -42,10 +42,6 @@
     <div class="form-group" *ngIf="flights$ | async as flights">
         <button class="btn btn-default" (click)="search()">
             Search
-        </button>
-
-        <button class="btn btn-default" (click)="delay()" *ngIf="flights.length > 0">
-            Delay 1st Flight
         </button>
 
         <div *ngIf="flights.length > 0">
