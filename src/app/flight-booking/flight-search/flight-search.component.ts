@@ -1,12 +1,9 @@
 // src/app/flight-search/flight-search.component.ts
 
-import {Component, Inject, OnInit} from '@angular/core';
-import { Flight } from '../flight';
-import { FlightService } from '../flight.service';
-import {BehaviorSubject, merge} from 'rxjs';
-import {DummyFlightService} from "../dummy-flight.service";
-import {DefaultFlightService} from "../default-flight.service";
-import {FLIGHT_SERVICES} from "../flight-tokens";
+import {Component, OnInit} from '@angular/core';
+import {Flight} from '../flight';
+import {FlightService} from '../flight.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-flight-search',
@@ -33,23 +30,21 @@ export class FlightSearchComponent implements OnInit {
     5: true
   };
 
+  // Variante with multi providers
   // Please note, that we need to use Inject with the FlightService type, because Arrays (e. g. FlightService[]) cannot be used as Tokens.
-  constructor(@Inject(FLIGHT_SERVICES) private flightServices: FlightService[]) {
+  /*constructor(@Inject(FLIGHT_SERVICES) private flightServices: FlightService[]) {
+  }*/
+
+  constructor(private flightService: FlightService) {
   }
 
   ngOnInit(): void {
   }
 
+  /*
+  // Variante with multi providers
   search(): void {
     const observables = this.flightServices.map(fs => fs.find(this.from, this.to));
-    /* this.flightService.find(this.from, this.to).subscribe(
-      (flights) => {
-        this.flights$.next(flights);
-      },
-      (err) => {
-        console.error('error', err);
-      }
-    );*/
 
     // Merge results of individual observables:
     const observable = merge(...observables);
@@ -62,6 +57,17 @@ export class FlightSearchComponent implements OnInit {
         console.debug('Error', err);
       }
     });
+  }*/
+
+  search(): void {
+    this.flightService.find(this.from, this.to).subscribe(
+      (flights) => {
+        this.flights$.next(flights);
+      },
+      (err) => {
+        console.error('error', err);
+      }
+    );
   }
 
   select(f: Flight): void {

@@ -10,25 +10,24 @@ import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
 import { FlightBookingComponent } from './flight-booking.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FormsModule } from '@angular/forms';
-import {FlightService} from './flight.service';
 import {DefaultFlightService} from './default-flight.service';
 import {DummyFlightService} from './dummy-flight.service';
-import {FLIGHT_SERVICES} from "./flight-tokens";
+import {FLIGHT_SERVICES} from './flight-tokens';
 
 @NgModule({
   imports: [
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
     FormsModule,
-    SharedModule
+    SharedModule.forChild()
   ],
   declarations: [
     FlightSearchComponent,
     FlightCardComponent,
     PassengerSearchComponent,
     FlightBookingComponent,
-    FlightEditComponent
+    FlightEditComponent,
   ],
-  providers: [{
+  /*providers: [{
     provide: FLIGHT_SERVICES,
     useClass: DefaultFlightService,
     multi: true
@@ -37,7 +36,7 @@ import {FLIGHT_SERVICES} from "./flight-tokens";
       provide: FLIGHT_SERVICES,
       useClass: DummyFlightService,
       multi: true
-    }],
+    }],*/
   exports: [
     FlightSearchComponent
   ]

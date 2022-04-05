@@ -1,8 +1,18 @@
 <h1>Flight Edit</h1>
 
+<div style="position: relative; z-index: 100" *ngIf="showWarning" class="alert alert-warning">
+  <div>
+    Daten wurden nicht gespeichert! Maske verlassen?
+  </div>
+  <p>&nbsp;</p>
+  <div>
+    <a href="javascript:void(0)" (click)="decide(true)" class="btn btn-danger">Verlassen</a>
+    <a href="javascript:void(0)" (click)="decide(false)" class="btn btn-default">Abbrechen</a>
+  </div>
+</div>
+
 <p>
     Id: {{id}}
 </p>
-<p>
-    ShowDetail: {{id}}
-</p>
+
+<pre>{{flight | json}}</pre>

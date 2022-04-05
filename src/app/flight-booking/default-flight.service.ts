@@ -12,7 +12,7 @@ export class DefaultFlightService implements FlightService{
 
 
   constructor(private http: HttpClient,
-              @Inject(BASE_URL) private baseUrl: string) {}
+              @Inject(BASE_URL) private baseUrl: string = 'http://www.angular.at/api/') {}
 
   find(from: string, to: string): Observable<Flight[]> {
     const url = this.baseUrl + 'flight';
@@ -25,6 +25,14 @@ export class DefaultFlightService implements FlightService{
       .set('to', to);
 
     return this.http.get<Flight[]>(url, {headers, params});
+  }
+
+  findById(id: string): Observable<Flight> {
+    const url =  this.baseUrl + 'flight';
+    const params = new HttpParams().set('id', id);
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+
+    return this.http.get<Flight>(url, {params, headers});
   }
 
 }

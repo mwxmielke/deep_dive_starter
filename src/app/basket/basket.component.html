@@ -3,8 +3,9 @@
 <div class="flight-history">
 
   <div class="flight-history-inside card">
-
-    <h2>Your Basket</h2>
+    <!--'/', ich meine aux auf der obersten ebene. hierarchisches routing, standardmäßig immer alles realtiv zur aktuellen route.
+     unterhalb von unserer route gibt es keine kinder mehr, deswegen '/' da routen ganz oben gemeint sind  -->
+    <h2>Your Basket <a [routerLink]="['/', {outlets: {aux: null}}]" >X</a></h2>
 
     <ul class="list-group">
 
